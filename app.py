@@ -63,14 +63,14 @@ with tabs[1]:
     st.write("High-frequency buyers are prime loyalty targets.")
 
     # Monetary distribution
-    fig3 = px.histogram(rfm, x="Monetary", nbins=30).update_traces(marker_color='#00FFFF')
+    fig3 = px.histogram(rfm, x="Monetary", nbins=30).update_traces(marker_color='#008080')
     st.plotly_chart(fig3, use_container_width=True)
     st.write("Spending peaks at ₹500–₹1000.")
     st.write("High spenders above ₹5000 form a key segment.")
     st.write("This guides premium marketing efforts.")
 
     # 3D scatter of segments
-    cmap = ['#008080','#FF69B4','#00FFFF','#FFC300','#DAF7A6']
+    cmap = ['#008080','#FF69B4','#008080','#FFC300','#DAF7A6']
     fig4 = px.scatter_3d(
         rfm, x="Recency", y="Frequency", z="Monetary",
         color="RFM_segment_label",
@@ -102,7 +102,7 @@ with tabs[2]:
     st.write("Model tuning could improve low-end accuracy.")
 
     # Avg CLTV by segment
-    fig7 = px.bar(cltv_by_seg, x="RFM_segment_label", y="predicted_CLTV_3m")        .update_traces(marker_color='#00FFFF')
+    fig7 = px.bar(cltv_by_seg, x="RFM_segment_label", y="predicted_CLTV_3m")        .update_traces(marker_color='#008080')
     st.plotly_chart(fig7, use_container_width=True)
     st.write("Champions segment shows highest CLTV.")
     st.write("Under-performers may need cross-sell initiatives.")
@@ -129,7 +129,7 @@ with tabs[3]:
     st.write("Mitigation programs are essential.")
 
     # Churn by segment
-    fig10 = px.bar(churn_by_seg, x="RFM_segment_label", y="churn_within_3m_flag")        .update_traces(marker_color='#00FFFF')
+    fig10 = px.bar(churn_by_seg, x="RFM_segment_label", y="churn_within_3m_flag")        .update_traces(marker_color='#008080')
     st.plotly_chart(fig10, use_container_width=True)
     st.write("‘At Risk’ segment churns above 50%.")
     st.write("‘Champions’ churn stays below 10%.")
@@ -159,7 +159,7 @@ with tabs[3]:
     y_pred = model.predict_proba(X_test)[:,1]
     fpr, tpr, _ = roc_curve(y_test, y_pred)
     auc = roc_auc_score(y_test, y_pred)
-    fig12 = px.line(x=fpr, y=tpr, title=f"ROC Curve (AUC={auc:.2f})")        .update_traces(line_color='#00FFFF')
+    fig12 = px.line(x=fpr, y=tpr, title=f"ROC Curve (AUC={auc:.2f})")        .update_traces(line_color='#008080')
     st.plotly_chart(fig12, use_container_width=True)
     st.write(f"AUC of **{auc:.2f}** indicates strong predictive power.")
     st.write("Use ROC to choose optimal threshold.")
